@@ -1,162 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Cardboard.Top</title>
-	<link rel="icon" type="image/x-icon" href="favicon.ico">
-	<!-- Link to AOS (Animate On Scroll) -->
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
-	<style>
-		/* General styles */
-		* {
-			margin: 0;
-			padding: 0;
-			box-sizing: border-box;
-		}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardboard.top</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dekko&display=swap');
 
-		body {
-			font-family: 'Arial', sans-serif;
-			background: url('https://www.toptal.com/designers/subtlepatterns/patterns/cardboard.png') repeat;
-			color: #333333;
-			line-height: 1.6;
-			min-height: 100vh;
-			display: flex;
-			flex-direction: column;
-		}
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Dekko', cursive;
+            background-color: #f5f5f5;
+            color: #333;
+            text-align: center;
+        }
 
-		header {
-			background: url('https://www.toptal.com/designers/subtlepatterns/patterns/cardboard.png') repeat, linear-gradient(90deg, #6a4c93, #6a4c93);
-			color: #ffffff;
-			text-align: center;
-			padding: 20px 0;
-			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-			border-bottom-left-radius: 20px;
-			border-bottom-right-radius: 20px;
-		}
+        .header {
+            background: url('cardboard.png') no-repeat center/cover;
+            padding: 10px 100px;
+            color: #000;
+        }
 
-		header h1 {
-			font-size: 2.5rem;
-			letter-spacing: 1px;
-		}
+        .header h1 {
+            font-size: 3rem;
+            margin: 0;
+        }
 
-		nav {
-			display: flex;
-			justify-content: center;
-			margin: 20px 0;
-		}
+        .header h2 {
+            font-size: 1.5rem;
+            margin: 10px 0;
+        }
 
-		nav a {
-			text-decoration: none;
-			margin: 0 15px;
-			padding: 10px 20px;
-			color: #ffffff;
-			background: #6a4c93;
-			border-radius: 20px;
-			transition: transform 0.3s, box-shadow 0.3s;
-		}
+        .content {
+            padding: 20px;
+        }
 
-		nav a:hover {
-			transform: scale(1.1);
-			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-		}
+        .category {
+            background: url('cardboard.png') no-repeat center/cover;
+            padding: 20px;
+            margin: 20px auto;
+            width: 80%;
+            max-width: 600px;
+            text-align: center;
+        }
 
-		main {
-			padding: 40px 20px;
-			flex: 1;
-		}
+        .category-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 10px;
+        }
 
-		section {
-			margin: 40px 0;
-			padding: 20px;
-			border-radius: 10px;
-			background: #ffffff;
-			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-			transition: transform 0.3s;
-		}
-
-		section:hover {
-			transform: scale(1.02);
-		}
-
-		h2 {
-			text-align: center;
-			margin-bottom: 20px;
-			font-size: 2rem;
-			color: #6a4c93;
-		}
-
-		ul {
-			list-style-type: disc;
-			padding-left: 20px;
-		}
-
-		.cta-button {
-			display: inline-block;
-			background: #6a4c93;
-			color: #ffffff;
-			text-decoration: none;
-			padding: 10px 20px;
-			border-radius: 20px;
-			margin-top: 20px;
-			text-align: center;
-			font-weight: bold;
-			transition: transform 0.3s, box-shadow 0.3s;
-		}
-
-		.cta-button:hover {
-			transform: scale(1.1);
-			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-		}
-
-		footer {
-			text-align: center;
-			background: url('https://www.toptal.com/designers/subtlepatterns/patterns/cardboard.png') repeat, #6a4c93;
-			color: #ffffff;
-			padding: 20px;
-			border-top-left-radius: 20px;
-			border-top-right-radius: 20px;
-			margin-top: auto; /* Keeps footer at the bottom */
-		}
-	</style>
+        .category-text {
+            font-size: 1.25rem;
+            line-height: 1.5;
+        }
+    </style>
 </head>
 <body>
-	<header>
-		<h1 data-aos="fade-down">Cardboard.Top</h1>
-		<p data-aos="fade-up">ArtZX website</p>
-	</header>
 
-	<nav>
-		<a href="#homepage" data-aos="zoom-in">Home</a>
-		<a href="#about" data-aos="zoom-in" data-aos-delay="200">About</a>
-	</nav>
+    <div class="header">
+        <h1>Cardboard.top</h1>
+        <h2>aka ArtZX's site</h2>
+    </div>
 
-	<main>
-		<section id="homepage" data-aos="fade-up">
-			<h2>Welcome to Cardboard.Top</h2>
-			<div>
-				<li>This is an personal site made by ArtZX.</li>
-                <li>I am using this site as an blog and to host my servers, like a Matrix server (soon) or Minecraft Server (idk)</li>
-			</div>
-		</section>
+    <div class="content">
+        <div class="category">
+            <div class="category-title">$ whoami</div>
+            <div class="category-text">
+                Hi. My pseudo is ArtZX.<br>
+                I am a scout. I am intrested in Linux and IT.
+            </div>
+        </div>
+        
+        <div class="category">
+            <div class="category-title">Projects</div>
+            <div class="category-text">
+                The project i may never complete is making my own Linux Distro.<br>
+                I am also working on cardboard computer (case) for my RPI 5.
+            </div>
+        </div>
 
-		<section id="about" data-aos="fade-up">
-			<h2>About me</h2>
-			<div>
-            <li>I live in Poland</li>
-            <li>I am a water specification scout.</li>
-            <li>I am intrested in Linux and IT</li>
-			</div>
-	</main>
+        <div class="category">
+            <div class="category-title">About</div>
+            <div class="category-text">
+                Text about the website or owner goes here.<br>
+                Additional personal information.
+            </div>
+        </div>
+    </div>
 
-	<footer>
-		<p>&copy; 2025 Cardboard.Top. All rights reserved.</p>
-	</footer>
-
-	<!-- AOS Script -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-	<script>
-		AOS.init();
-	</script>
 </body>
 </html>
