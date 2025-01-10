@@ -20,12 +20,38 @@
             height: 100%;
             object-fit: cover;
         }
+
+        #prompt {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 2rem;
+            text-align: center;
+            display: none;
+        }
     </style>
 </head>
 <body>
-    <video autoplay loop>
+    <div id="prompt">Press any key to play the video</div>
+    <video id="video" loop>
         <source src="spinning-chip.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
+
+    <script>
+        const video = document.getElementById('video');
+        const prompt = document.getElementById('prompt');
+
+        // Show the prompt to the user
+        prompt.style.display = 'block';
+
+        // Wait for user interaction to play video
+        document.body.addEventListener('keydown', () => {
+            prompt.style.display = 'none';
+            video.play();
+        }, { once: true });
+    </script>
 </body>
 </html>
