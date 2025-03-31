@@ -22,19 +22,19 @@
 </head>
 <body>
     <video id="rick" autoplay loop>
-        <source src="beemovie.mp4" type="video/mp4">
+        <source src="/coolmathgame/beemovie.mp4" type="video/mp4">
         Sorry, this website does not work on your browser!
         Try again on another one!
     </video>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            let video = document.getElementById("rick");
-            video.muted = false;
-            video.requestFullscreen();
-            video.play();
-        });
-        navigator.vibrate([500, 200, 500]);
+    let video = document.getElementById("rick");
+    video.muted = true;  
+    video.play().then(() => {
+        setTimeout(() => { video.muted = false; }, 1000); // Unmute after 1 sec
+    }).catch(err => console.error("Autoplay failed:", err));
+});
     </script>
 </body>
 </html>
