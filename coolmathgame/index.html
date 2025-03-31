@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A website</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <video id="rick" autoplay loop>
+        <source src="beemovie.mp4" type="video/mp4">
+        Sorry, this website does not work on your browser!
+        Try again on another one!
+    </video>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let video = document.getElementById("rick");
+            video.muted = false;
+            video.requestFullscreen();
+            video.play();
+        });
+        navigator.vibrate([500, 200, 500]);
+    </script>
+</body>
+</html>
