@@ -3,78 +3,84 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Meme Finder</title>
+  <title>Meme Finder – Autocomplete & Explanations</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      max-width: 800px;
-      margin: auto;
-    }
-    h1 {
-      text-align: center;
-    }
-    #searchInput {
-      width: 100%;
-      padding: 10px;
-      font-size: 1rem;
-    }
-    #results {
-      margin-top: 20px;
-    }
-    .meme {
-      border-bottom: 1px solid #ccc;
-      padding: 10px 0;
-    }
-    .meme h2 {
-      margin: 0;
-    }
-    .meme p {
-      margin: 5px 0 0 0;
-    }
+    body { font-family: Arial, sans-serif; padding: 1rem; max-width: 800px; margin: auto; }
+    h1 { text-align: center; }
+    #search { width: 100%; padding: .5rem; font-size: 1.1rem; }
+    #results { margin-top: 1rem; }
+    .meme { border-bottom: 1px solid #ddd; padding: .75rem 0; }
+    .meme h2 { margin: 0; }
+    .meme p { margin: .5rem 0 0; }
+    .meme a { font-size: .9rem; color: #007bff; text-decoration: none; }
   </style>
 </head>
 <body>
-
   <h1>Meme Finder</h1>
   <p>Tell me what's your meme, we'll take care of the rest!</p>
-  <input type="text" id="searchInput" placeholder="Search for a meme..." oninput="searchMeme()" />
-  <div id="results"></div>
+  <input id="search" placeholder="Start typing a meme name or keyword…" autocomplete="off" />
+  <div id="results">Loading meme database…</div>
 
+  <!-- Fuse.js for client-side fuzzy search -->
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2/dist/fuse.min.js"></script>
   <script>
-    let memes = [];
+    const resultsDiv = document.getElementById('results');
+    const searchInput = document.getElementById('search');
+    let fuse;            // Fuse.js instance
+    let memeIndex = [];  // { title, description, url }
 
-    // Fetch the meme data
-    fetch('memes.json')
-      .then(response => response.json())
-      .then(data => {
-        memes = data;
-      });
+    // 1) Fetch list of all pages in Category:Internet_memes (up to 500 per request)
+    async function fetchAllMemes(cmcontinue = '') {
+      const apiroot = 'https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&list=categorymembers&cmtitle=Category:Internet_memes&cmlimit=500' +
+                      (cmcontinue ? '&cmcontinue=' + encodeURIComponent(cmcontinue) : '');
+      const resp = await fetch(apiroot).then(r => r.json());
+      const members = resp.query.categorymembers;
+      // 2) For each page, fetch its extract (intro summary)
+      await Promise.all(members.map(async m => {
+        const sum = await fetch(`https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exintro&explaintext&format=json&origin=*&titles=${encodeURIComponent(m.title)}`)
+                          .then(r => r.json());
+        const page = Object.values(sum.query.pages)[0];
+        memeIndex.push({
+          title: m.title,
+          description: page.extract.split('\n')[0],   // first paragraph
+          url: 'https://en.wikipedia.org/wiki/' + encodeURIComponent(m.title.replace(/ /g,'_'))
+        });
+      }));
+      // if there’s more, recurse
+      if (resp.continue && resp.continue.cmcontinue) {
+        await fetchAllMemes(resp.continue.cmcontinue);
+      }
+    }
 
-    function searchMeme() {
-      const query = document.getElementById('searchInput').value.toLowerCase();
-      const resultsDiv = document.getElementById('results');
-      resultsDiv.innerHTML = '';
+    // Initialize
+    (async () => {
+      await fetchAllMemes();
+      resultsDiv.innerHTML = 'Database loaded: ' + memeIndex.length + ' memes. Start typing above!';
+      // set up Fuse.js
+      fuse = new Fuse(memeIndex, { keys: ['title','description'], threshold: 0.3 });
+    })();
 
-      const filteredMemes = memes.filter(meme =>
-        meme.title.toLowerCase().includes(query) ||
-        meme.description.toLowerCase().includes(query) ||
-        meme.tags.some(tag => tag.toLowerCase().includes(query))
-      );
-
-      if (filteredMemes.length === 0) {
-        resultsDiv.innerHTML = '<p>No memes found.</p>';
+    // On search input
+    searchInput.addEventListener('input', () => {
+      const q = searchInput.value.trim();
+      if (!q) {
+        resultsDiv.innerHTML = '';
         return;
       }
-
-      filteredMemes.forEach(meme => {
-        const memeDiv = document.createElement('div');
-        memeDiv.className = 'meme';
-        memeDiv.innerHTML = `<h2>${meme.title}</h2><p>${meme.description}</p>`;
-        resultsDiv.appendChild(memeDiv);
-      });
-    }
+      const matches = fuse.search(q, {limit: 50}).map(r => r.item);
+      if (matches.length === 0) {
+        resultsDiv.innerHTML = '<p>No matches found.</p>';
+        return;
+      }
+      // Render matches
+      resultsDiv.innerHTML = matches.map(m => `
+        <div class="meme">
+          <h2>${m.title}</h2>
+          <p>${m.description}</p>
+          <a href="${m.url}" target="_blank">Read more on Wikipedia →</a>
+        </div>
+      `).join('');
+    });
   </script>
-
 </body>
 </html>
