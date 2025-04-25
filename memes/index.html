@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Meme Finder</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+    }
+    #searchInput {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+    }
+    #results {
+      margin-top: 20px;
+    }
+    .meme {
+      border-bottom: 1px solid #ccc;
+      padding: 10px 0;
+    }
+    .meme h2 {
+      margin: 0;
+    }
+    .meme p {
+      margin: 5px 0 0 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Meme Finder</h1>
+  <p>Tell me what's your meme, we'll take care of the rest!</p>
+  <input type="text" id="searchInput" placeholder="Search for a meme..." oninput="searchMeme()" />
+  <div id="results"></div>
+
+  <script>
+    let memes = [];
+
+    // Fetch the meme data
+    fetch('memes.json')
+      .then(response => response.json())
+      .then(data => {
+        memes = data;
+      });
+
+    function searchMeme() {
+      const query = document.getElementById('searchInput').value.toLowerCase();
+      const resultsDiv = document.getElementById('results');
+      resultsDiv.innerHTML = '';
+
+      const filteredMemes = memes.filter(meme =>
+        meme.title.toLowerCase().includes(query) ||
+        meme.description.toLowerCase().includes(query) ||
+        meme.tags.some(tag => tag.toLowerCase().includes(query))
+      );
+
+      if (filteredMemes.length === 0) {
+        resultsDiv.innerHTML = '<p>No memes found.</p>';
+        return;
+      }
+
+      filteredMemes.forEach(meme => {
+        const memeDiv = document.createElement('div');
+        memeDiv.className = 'meme';
+        memeDiv.innerHTML = `<h2>${meme.title}</h2><p>${meme.description}</p>`;
+        resultsDiv.appendChild(memeDiv);
+      });
+    }
+  </script>
+
+</body>
+</html>
