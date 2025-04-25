@@ -1,103 +1,167 @@
 [
     {
+      "title": "Arthur’s Fist",
+      "description": "A close-up of cartoon Arthur’s clenched fist, used to convey suppressed anger or frustration.",
+      "tags": ["classic","2016","reaction"]
+    },
+    {
+      "title": "Is This a Pigeon?",
+      "description": "A screencap from a Japanese anime where a character mistakes a butterfly for a pigeon, used to highlight misidentification or confusion.",
+      "tags": ["classic","2011","image macro"]
+    },
+    {
+      "title": "One Does Not Simply",
+      "description": "Boromir from The Lord of the Rings saying “One does not simply walk into Mordor,” repurposed to exaggerate difficulty of everyday tasks.",
+      "tags": ["classic","2011","quote"]
+    },
+    {
+      "title": "Condescending Wonka",
+      "description": "Gene Wilder as Willy Wonka with a sarcastic half-smile, used to mock or patronize a statement.",
+      "tags": ["classic","2012","reaction"]
+    },
+    {
+      "title": "Roll Safe",
+      "description": "A still of actor Kayode Ewumi tapping his temple, used to suggest flawed “clever” thinking.",
+      "tags": ["classic","2016","reaction"]
+    },
+    {
+      "title": "Hide the Pain Harold",
+      "description": "A stock photo of an older man smiling painfully, used to convey hidden discomfort or resignation.",
+      "tags": ["classic","2011","stock photo"]
+    },
+    {
       "title": "Distracted Boyfriend",
-      "description": "A stock photo of a man turning to look at another woman while his girlfriend looks on in disbelief, used to represent shifting attention or priorities.", 
-      "tags": ["classic", "2017", "image macro"] 
+      "description": "A man glancing at another woman while his girlfriend looks on in disgust, symbolizing shifting loyalties or temptations.", 
+      "tags": ["classic","2017","image macro"] 
     },
     {
       "title": "Expanding Brain",
-      "description": "A series of images showing increasingly illuminated brains to represent ascending levels of intellect or enlightenment.", 
-      "tags": ["classic", "2017", "image macro"] 
+      "description": "Four-panel brain images showing ascending ‘enlightenment,’ used to rank ideas from simple to absurdly complex.", 
+      "tags": ["classic","2017","image macro"] 
     },
     {
-      "title": "First World Problems",
-      "description": "An attractive person crying over trivial inconveniences, satirizing privileged complaints.", 
-      "tags": ["classic", "2011", "reaction"] 
-    },
-    {
-      "title": "Change My Mind",
-      "description": "Steven Crowder seated at a table with a sign inviting others to change his mind, parodied by swapping the sign’s text.", 
-      "tags": ["classic", "2018", "photoshop"] 
+      "title": "Drake Hotline Bling",
+      "description": "Two-panel Drake rejecting one thing and approving another, signifying preferences.", 
+      "tags": ["classic","2015","reaction"] 
     },
     {
       "title": "Woman Yelling at a Cat",
-      "description": "A split image of a Reality TV star yelling and a confused cat at a dinner table, used to depict arguments or misunderstandings.", 
-      "tags": ["classic", "2019", "reaction"] 
+      "description": "A reality-TV cast member screaming beside a photo of a confused cat, depicting comical arguments.", 
+      "tags": ["classic","2019","reaction"] 
+    },
+    {
+      "title": "Change My Mind",
+      "description": "Steven Crowder at a campus table inviting debate, parodied by changing the sign text.", 
+      "tags": ["classic","2018","photoshop"] 
     },
     {
       "title": "Mocking SpongeBob",
-      "description": "SpongeBob bent over in a chicken-like pose, captioned with alternating uppercase and lowercase letters to mock a statement.", 
-      "tags": ["classic", "2017", "text"] 
-    },
-    {
-      "title": "Grumpy Cat",
-      "description": "A cat with a perpetually displeased expression, symbolizing disdain or negativity.", 
-      "tags": ["early", "2012", "animal"] 
-    },
-    {
-      "title": "Overly Attached Girlfriend",
-      "description": "A woman with wide eyes and a creepy smile, captioned with clingy or obsessive statements to parody relationship insecurity.", 
-      "tags": ["early", "2012", "photo"] 
-    },
-    {
-      "title": "Scumbag Steve",
-      "description": "A teenager wearing a sideways cap and fur-lined jacket, used to represent selfish or unethical behavior.", 
-      "tags": ["early", "2011", "image macro"] 
-    },
-    {
-      "title": "Bad Luck Brian",
-      "description": "A school-photo boy with braces and a plaid sweater-vest, paired with captions of unfortunate events.", 
-      "tags": ["early", "2012", "image macro"] 
+      "description": "SpongeBob bent over in a chicken-like pose, mocking statements via alternating letter case.", 
+      "tags": ["classic","2017","text"] 
     },
     {
       "title": "Success Kid",
-      "description": "A toddler clenching a fistful of sand with a determined expression, representing small victories.", 
-      "tags": ["early", "2011", "photo"] 
+      "description": "A toddler clenching sand, symbolizing small personal victories.", 
+      "tags": ["early","2011","photo"] 
     },
     {
-      "title": "Ancient Aliens",
-      "description": "Giorgio Tsoukalos gesturing wildly on the History Channel, captioned to blame everything on aliens.", 
-      "tags": ["classic", "2010", "reaction"] 
+      "title": "Bad Luck Brian",
+      "description": "A school-photo boy paired with captions of comically unfortunate events.", 
+      "tags": ["early","2012","image macro"] 
+    },
+    {
+      "title": "Scumbag Steve",
+      "description": "A teen in a sideways cap symbolizing selfish or unethical behavior.", 
+      "tags": ["early","2011","image macro"] 
+    },
+    {
+      "title": "Overly Attached Girlfriend",
+      "description": "A wide-eyed woman captioned with clingy statements to parody relationship insecurity.", 
+      "tags": ["early","2012","photo"] 
     },
     {
       "title": "Philosoraptor",
-      "description": "A velociraptor pondering with its claw on its chin, used for philosophical or paradoxical questions.", 
-      "tags": ["early", "2011", "image macro"] 
+      "description": "A dinosaur pondering with claw on chin, used for deep or paradoxical questions.", 
+      "tags": ["early","2011","image macro"] 
     },
     {
       "title": "Y U No",
-      "description": "A crudely drawn face screaming “Y U NO…” to express frustration at someone’s actions.", 
-      "tags": ["early", "2010", "rage comic"] 
-    },
-    {
-      "title": "Italian Brainrot Animals",
-      "description": "AI-generated bizarre Italian creatures with humorous backstories, exemplifying modern surreal ‘brainrot’ humor.", 
-      "tags": ["brainrot", "2024", "AI"] 
-    },
-    {
-      "title": "Skibidi Toilet",
-      "description": "A surreal meme of a human head emerging from a toilet, often set to chaotic music for absurdist effect.", 
-      "tags": ["brainrot", "TikTok", "surreal"] 
-    },
-    {
-      "title": "Gyatt",
-      "description": "Slang praising someone’s physique, especially curvy figures, popularized on TikTok.", 
-      "tags": ["brainrot", "TikTok", "slang"] 
-    },
-    {
-      "title": "Rizz",
-      "description": "Short for ‘charisma,’ used to denote someone’s charm or attractiveness in social contexts.", 
-      "tags": ["brainrot", "TikTok", "slang"] 
-    },
-    {
-      "title": "Among Us (‘sus’)",
-      "description": "From the multiplayer game Among Us, ‘sus’ denotes suspicion; used broadly to call out untrustworthy behavior.", 
-      "tags": ["gaming", "2020", "slang"] 
+      "description": "A crudely drawn face screaming “Y U NO…” to express frustration.", 
+      "tags": ["early","2010","rage comic"] 
     },
     {
       "title": "Doge",
-      "description": "A Shiba Inu dog surrounded by multicolored Comic Sans text in broken English to convey inner monologue.", 
-      "tags": ["early", "2013", "animal"] 
+      "description": "Shiba Inu dog with multicolored Comic Sans text in broken English expressing inner thoughts.", 
+      "tags": ["early","2013","animal"] 
+    },
+    {
+      "title": "Rickroll",
+      "description": "A bait-and-switch prank linking to Rick Astley’s “Never Gonna Give You Up” video.", 
+      "tags": ["classic","2008","bait-and-switch"] 
+    },
+    {
+      "title": "Pepe the Frog",
+      "description": "A cartoon frog used in countless reaction memes, from sad to smug expressions.", 
+      "tags": ["classic","2005","cartoon"] 
+    },
+    {
+      "title": "Left Exit 12 Off Ramp",
+      "description": "A car veering off highway to exit ramp, illustrating sudden changes in preference.", 
+      "tags": ["classic","2015","diagram"] 
+    },
+    {
+      "title": "Ancient Aliens",
+      "description": "Giorgio Tsoukalos attributing everything to aliens, used to mock far-fetched explanations.", 
+      "tags": ["classic","2010","reaction"] 
+    },
+    {
+      "title": "Brainlet Galaxy Brain",
+      "description": "A four-panel brain meme with increasingly absurd “brainlet” logic.", 
+      "tags": ["modern","2019","image macro"] 
+    },
+    {
+      "title": "Skibidi Toilet",
+      "description": "Surreal meme of a human head emerging from a toilet, set to chaotic music for absurdist effect.", 
+      "tags": ["brainrot","TikTok","surreal"] 
+    },
+    {
+      "title": "Gyatt",
+      "description": "Slang praising curvy physiques, popular on TikTok.", 
+      "tags": ["brainrot","TikTok","slang"] 
+    },
+    {
+      "title": "Rizz",
+      "description": "Short for “charisma,” denoting charm or flirtatious skill.", 
+      "tags": ["brainrot","TikTok","slang"] 
+    },
+    {
+      "title": "Among Us (‘sus’)",
+      "description": "From the game Among Us, “sus” denotes suspicion; used to call out shady behavior.", 
+      "tags": ["gaming","2020","slang"] 
+    },
+    {
+      "title": "Italian Brainrot Animals",
+      "description": "AI-generated bizarre Italian creatures with humorous backstories, epitomizing modern surreal brainrot.", 
+      "tags": ["brainrot","2024","AI"] 
+    },
+    {
+      "title": "Naked Bass Pro Shops Man",
+      "description": "A model posing nude in fishing gear, unintentionally spawning countless parodies and mashups.", 
+      "tags": ["2024","absurd","viral"] 
+    },
+    {
+      "title": "Very Mindful, Very Demure",
+      "description": "TikTok audio and format contrasting “mindful” behavior with absurd visuals, used ironically.", 
+      "tags": ["2024","TikTok","brainrot"] 
+    },
+    {
+      "title": "Moo Deng",
+      "description": "Viral TikTok phrase and dance—“Moo Deng”—used in meme compilations.", 
+      "tags": ["2024","TikTok","dance"] 
+    },
+    {
+      "title": "Distracted Girlfriend (Italian Brainrot)",
+      "description": "A surreal Italian-styled redraw of the classic Distracted Boyfriend, bridging classic and brainrot.", 
+      "tags": ["brainrot","remix","image macro"] 
     }
-  ]
-  
+  ]  
