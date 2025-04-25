@@ -43,7 +43,7 @@
         return fetch('https://api.imgflip.com/get_memes')
           .then(r=>r.json())
           .then(j=>j.data.memes.map(t=>({
-            source:'imgflip', title:t.name, description:'[template]', image:t.url, url:t.url
+            source:'imgflip', title:t.name, description:'[template]', image:t.url, url:null
           })))
           .then(imgflipMemes=>{
             index = [...staticMemes, ...imgflipMemes];
@@ -58,7 +58,7 @@
       });
 
     // 4) search on input
-    searchInput.addEventListener('input', ()=>{
+    searchInput.addEventListener('input', async ()=>{
       const q = searchInput.value.trim();
       if(!q) {
         resultsDiv.innerHTML = '';
@@ -69,16 +69,22 @@
         resultsDiv.innerHTML = '<p>No matches found.</p>';
         return;
       }
-      resultsDiv.innerHTML = results.map(m=>`
-        <div class="meme">
-          ${m.image?`<img src="${m.image}" alt="${m.title}"/>`:''}
-          <div class="info">
-            <h2>${m.title}</h2>
-            <p>${m.description||'[no description]'}</p>
-            ${m.url?`<a href="${m.url}" target="_blank">View</a>`:''}
+
+      resultsDiv.innerHTML = await Promise.all(results.map(async m=>{
+        // Search for meme explanation using Google Search
+        const explanationUrl = `https://www.google.com/search?q=${encodeURIComponent(m.title + " meme explanation")}`;
+
+        return `
+          <div class="meme">
+            ${m.image ? `<img src="${m.image}" alt="${m.title}"/>` : ''}
+            <div class="info">
+              <h2>${m.title}</h2>
+              <p>${m.description || '[No description]'}</p>
+              <a href="${explanationUrl}" target="_blank">Learn more about this meme</a>
+            </div>
           </div>
-        </div>
-      `).join('');
+        `;
+      })).join('');
     });
   </script>
 
