@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Meme Finder + Random Meme</title>
+  <title>Meme Finder</title>
   <style>
     body { font-family: Arial, sans-serif; padding: 1rem; max-width: 800px; margin: auto; }
     #search, button { width: 100%; padding: .5rem; margin: .5rem 0; font-size: 1rem; }
@@ -15,15 +15,12 @@
 </head>
 <body>
 
-  <h1>🤖 Meme Finder + Random Meme</h1>
+  <h1>Meme Finder</h1>
+  <p>You will try to explain the meme, we'll take care of the rest!</p>
 
   <!-- Search Section -->
   <input id="search" placeholder="Search memes by name, tag, or keyword…" autocomplete="off"/>
   <div id="results"></div>
-
-  <!-- Random Meme Section -->
-  <button id="randomBtn">🎲 Show Me a Random Meme</button>
-  <div id="randomResult"></div>
 
   <!-- Fuse.js for search -->
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2/dist/fuse.min.js"></script>
@@ -56,30 +53,6 @@
           <p>${m.description}</p>
         </div>
       `).join('');
-    });
-
-    // 3) Random Meme handler
-    document.getElementById('randomBtn').addEventListener('click', async () => {
-      randomDiv.innerHTML = '<p>Loading random meme…</p>';
-      try {
-        const resp = await fetch('https://meme-api.com/gimme');
-        const j = await resp.json();                        // fetch from Meme-API :contentReference[oaicite:1]{index=1}
-        const title = j.title, img = j.url;
-        // find explanation via fuzzy title match
-        const best = fuse.search(title, { limit: 1 })[0];
-        const desc = best ? best.item.description : 'No explanation found.';
-        randomDiv.innerHTML = `
-          <div class="random">
-            <h2>${title}</h2>
-            <img src="${img}" alt="${title}"/>
-            <p>${desc}</p>
-            <p><a href="${j.postLink}" target="_blank">View on Reddit</a></p>
-          </div>
-        `;
-      } catch (err) {
-        randomDiv.innerHTML = '<p>Error fetching random meme.</p>';
-        console.error(err);
-      }
     });
   </script>
 </body>
