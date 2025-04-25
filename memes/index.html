@@ -1,86 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Meme Finder + Random Meme</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Meme Finder</title>
   <style>
-    body { font-family: Arial, sans-serif; padding: 1rem; max-width: 800px; margin: auto; }
-    #search, button { width: 100%; padding: .5rem; margin: .5rem 0; font-size: 1rem; }
-    .meme, .random { border-bottom:1px solid #ddd; padding: .75rem 0; }
-    .meme h2, .random h2 { margin: .5rem 0; }
-    .meme p, .random p { margin: .25rem 0; }
-    .random img { max-width:100%; height:auto; display:block; margin: .5rem 0; }
+    body { font-family: sans-serif; max-width:800px; margin:2rem auto; padding:0 1rem; }
+    h1 { text-align:center; }
+    #search { width:100%; padding:.5rem; font-size:1.1rem; }
+    #results { margin-top:1rem; }
+    .meme { border-bottom:1px solid #ddd; padding:.75rem 0; display:flex; gap:1rem; }
+    .meme img { max-width:100px; object-fit:cover; }
+    .meme .info { flex:1; }
+    .meme h2 { margin:0 0 .25rem; font-size:1.1rem; }
+    .meme p { margin:0; color:#555; }
   </style>
 </head>
 <body>
 
-  <h1>🤖 Meme Finder + Random Meme</h1>
+  <h1>Meme Finder</h1>
+  <p>You will try to explain the meme, we'll take care of the rest!</p>
+  <input id="search" placeholder="Type a meme name or keyword…" autocomplete="off"/>
 
-  <!-- Search Section -->
-  <input id="search" placeholder="Search memes by name, tag, or keyword…" autocomplete="off"/>
-  <div id="results"></div>
+  <div id="results">Loading database…</div>
 
-  <!-- Random Meme Section -->
-  <button id="randomBtn">🎲 Show Me a Random Meme</button>
-  <div id="randomResult"></div>
-
-  <!-- Fuse.js for search -->
+  <!-- Fuse.js for fuzzy search -->
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2/dist/fuse.min.js"></script>
   <script>
-    let memes = [], fuse;
+    let index = [], fuse;
     const resultsDiv = document.getElementById('results');
-    const randomDiv = document.getElementById('randomResult');
+    const searchInput = document.getElementById('search');
 
-    // 1) Load static memes.json
+    // 1) load your static memes.json
     fetch('memes.json')
-      .then(r => r.json())
-      .then(data => {
-        memes = data;
-        fuse = new Fuse(memes, { keys: ['title','description','tags'], threshold: 0.3 });
+      .then(r=>r.json())
+      .then(staticMemes => {
+        // normalize to unified shape
+        staticMemes = staticMemes.map(m=>({
+          source:'static', title:m.title, description:m.description, image:null, url:null
+        }));
+        // 2) fetch Imgflip templates
+        return fetch('https://api.imgflip.com/get_memes')
+          .then(r=>r.json())
+          .then(j=>j.data.memes.map(t=>({
+            source:'imgflip', title:t.name, description:'[template]', image:t.url, url:t.url
+          })))
+          .then(imgflipMemes=>{
+            index = [...staticMemes, ...imgflipMemes];
+            // 3) init Fuse
+            fuse = new Fuse(index, { keys:['title','description'], threshold:0.3 });
+            resultsDiv.textContent = 'Database loaded: ' + index.length + ' items. Start typing above!';
+          });
+      })
+      .catch(err=>{
+        console.error(err);
+        resultsDiv.textContent = 'Failed to load database.';
       });
 
-    // 2) Search handler
-    document.getElementById('search').addEventListener('input', e => {
-      const q = e.target.value.trim();
-      resultsDiv.innerHTML = '';
-      if (!q) return;
-      const matches = fuse.search(q, { limit: 20 }).map(r=>r.item);
-      if (!matches.length) {
+    // 4) search on input
+    searchInput.addEventListener('input', ()=>{
+      const q = searchInput.value.trim();
+      if(!q) {
+        resultsDiv.innerHTML = '';
+        return;
+      }
+      const results = fuse.search(q, {limit:50}).map(r=>r.item);
+      if(results.length===0) {
         resultsDiv.innerHTML = '<p>No matches found.</p>';
         return;
       }
-      resultsDiv.innerHTML = matches.map(m => `
+      resultsDiv.innerHTML = results.map(m=>`
         <div class="meme">
-          <h2>${m.title}</h2>
-          <p>${m.description}</p>
+          ${m.image?`<img src="${m.image}" alt="${m.title}"/>`:''}
+          <div class="info">
+            <h2>${m.title}</h2>
+            <p>${m.description||'[no description]'}</p>
+            ${m.url?`<a href="${m.url}" target="_blank">View</a>`:''}
+          </div>
         </div>
       `).join('');
     });
-
-    // 3) Random Meme handler
-    document.getElementById('randomBtn').addEventListener('click', async () => {
-      randomDiv.innerHTML = '<p>Loading random meme…</p>';
-      try {
-        const resp = await fetch('https://meme-api.com/gimme');
-        const j = await resp.json();                        // fetch from Meme-API :contentReference[oaicite:1]{index=1}
-        const title = j.title, img = j.url;
-        // find explanation via fuzzy title match
-        const best = fuse.search(title, { limit: 1 })[0];
-        const desc = best ? best.item.description : 'No explanation found.';
-        randomDiv.innerHTML = `
-          <div class="random">
-            <h2>${title}</h2>
-            <img src="${img}" alt="${title}"/>
-            <p>${desc}</p>
-            <p><a href="${j.postLink}" target="_blank">View on Reddit</a></p>
-          </div>
-        `;
-      } catch (err) {
-        randomDiv.innerHTML = '<p>Error fetching random meme.</p>';
-        console.error(err);
-      }
-    });
   </script>
+
 </body>
 </html>
